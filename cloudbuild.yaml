@@ -2,7 +2,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'wiz/$PROJECT_ID/tasky', '.']
 images:
-  - 'gcr.io/$PROJECT_ID/my-image'
+  - 'wiz/$PROJECT_ID/tasky'
 
 # Add this section to fix the error:
 logsBucket: 'gs://wiz-cloud-build-logs-tasky'
