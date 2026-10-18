@@ -6,11 +6,21 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/tasky', '.']
 
+  - name: 'gcr.io/://google.com'
+    entrypoint: 'gcloud'
+    args:
+      - 'container'
+      - 'clusters'
+      - 'create'
+      - 'wiz-cluster' # Change to your preferred cluster name
+      - '--region=us-east4'    # Change to your target region or zone
+      - '--num-nodes=3'          # Adjust the node count as needed
+      
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'kubernetes/deployment.yaml']
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-east4-a'     
-      - 'CLOUDSDK_CONTAINER_CLUSTER=my-cluster' 
+      - 'CLOUDSDK_CONTAINER_CLUSTER=wiz-cluster' 
 images:
   - 'gcr.io/$PROJECT_ID/tasky'
 
