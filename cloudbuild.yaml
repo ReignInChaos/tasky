@@ -1,4 +1,8 @@
 steps:
+  # Prune unused/dangling Docker images on the worker
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['image', 'prune', '-a', '-f']
+    
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'wiz/$PROJECT_ID/tasky', '.']
 images:
