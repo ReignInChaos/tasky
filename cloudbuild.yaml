@@ -16,10 +16,6 @@ steps:
       - '--region=us-east4'
       - '--num-nodes=3'
       - '--release-channel=regular'
-
-    substitutions:
-    _CLUSTER_NAME: 'wiz-cluster'
-    _REGION: 'us-east4'
       
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'kubernetes/deployment.yaml']
