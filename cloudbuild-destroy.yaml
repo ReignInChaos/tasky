@@ -12,4 +12,4 @@ steps:
     args: ['apply', '-auto-approve', 'destroy.tfplan']
 
 # Explicit logging destination
-logsBucket: 'gs://wiz-cloud-build-logs'
+logsBucket: 'gs://wiz-cloud-build-logs-tasky'
