@@ -10,7 +10,7 @@ steps:
     args: ['apply', '-f', 'kubernetes.yaml']
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-east4'     
-      - 'CLOUDSDK_CONTAINER_CLUSTER=wiz' 
+      - 'CLOUDSDK_CONTAINER_CLUSTER=wiz-cluster' 
 images:
   - 'gcr.io/$PROJECT_ID/tasky'
 
