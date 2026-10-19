@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wiz-app-deployment
+  labels:
+    app: wiz-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wiz-app
+  template:
+    metadata:
+      labels:
+        app: wiz-app
+    spec:
+      containers:
+      - name: wiz-app-container
+        # Cloud Build can dynamically swap this image tag or you can use a fixed tag
+        image: us-east4-docker.pkg.dev/clgcporg10-188/gcr-io/tasky:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wiz-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
