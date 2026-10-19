@@ -5,7 +5,18 @@ steps:
     
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/tasky', '.']
-      
+
+  # 1. Fetch credentials using the internal IP endpoint
+  - name: 'gcr.io/://google.com'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud container clusters get-credentials my-private-cluster \
+          --region us-central1 \
+          --project my-gcp-project-id \
+          --internal-ip
+
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'kubernetes.yaml', '--validate=false']
     env:
