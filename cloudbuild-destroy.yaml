@@ -1,0 +1,15 @@
+steps:
+  # Initialize Terraform using your existing backend
+  - name: 'hashicorp/terraform:1.5.0'
+    args: ['init']
+
+  # Generate the destruction plan first (Best Practice)
+  - name: 'hashicorp/terraform:1.5.0'
+    args: ['plan', '-destroy', '-out=destroy.tfplan']
+
+  # Execute the destruction plan
+  - name: 'hashicorp/terraform:1.5.0'
+    args: ['apply', '-auto-approve', 'destroy.tfplan']
+
+# Explicit logging destination
+logsBucket: 'gs://wiz-cloud-build-logs'
