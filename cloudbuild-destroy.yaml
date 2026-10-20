@@ -1,15 +1,12 @@
 steps:
-  # Initialize Terraform using your existing backend
-  - name: 'hashicorp/terraform:1.5.0'
-    args: ['init']
 
-  # Generate the destruction plan first (Best Practice)
-  - name: 'hashicorp/terraform:1.5.0'
-    args: ['plan', '-destroy', '-out=destroy.tfplan']
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['delete', '-f', 'kubernetes.yaml']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-east4'     
+      - 'CLOUDSDK_CONTAINER_CLUSTER=wiz-cluster' 
 
-  # Execute the destruction plan
-  - name: 'hashicorp/terraform:1.5.0'
-    args: ['apply', '-auto-approve', 'destroy.tfplan']
 
-# Explicit logging destination
+
+# Add this section to fix the error:
 logsBucket: 'gs://wiz-cloud-build-logs-tasky'
