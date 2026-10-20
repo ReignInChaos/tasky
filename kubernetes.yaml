@@ -22,7 +22,7 @@ spec:
           - name: MONGODB_URI
             value: "mongodb://wiz:ThisIsABadIdea1234@10.0.0.2:27017"
           - name: SECRET_KEY
-         #  value: "secret123"
+            value: "secret123"
         ports:
         - containerPort: 8080
         readinessProbe:
