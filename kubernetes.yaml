@@ -64,3 +64,14 @@ metadata:
   annotations:
     # Provisions an External Google Cloud HTTP(S) Load Balancer
     kubernetes.io/ingress.class: "gce"
+  spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: my-app-service
+            port:
+              number: 80
