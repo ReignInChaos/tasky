@@ -30,6 +30,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: tasky-service
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}' # 👈 Required for GKE Ingress
   labels:
     app: tasky
 spec:
