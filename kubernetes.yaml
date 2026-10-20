@@ -17,7 +17,7 @@ spec:
       containers:
       - name: wiz-app-container
         # Cloud Build can dynamically swap this image tag or you can use a fixed tag
-        image: us-east4-docker.pkg.dev/clgcporg10-188/gcr-io/tasky:latest
+        image: us-east4-docker.pkg.dev/clgcporg10-188/gcr.io/tasky:latest
         #env:
          # - name: MONGODB_URI
         #    value: "mongodb://wiz:ThisIsABadIdea1234@10.0.0.2:27017"
