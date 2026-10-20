@@ -29,12 +29,31 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wiz-app-service
+  name: tasky-service
+  labels:
+    app: tasky
 spec:
-  type: LoadBalancer
+  type: NodePort 
   selector:
-    app: my-app
+    app: tasky
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
+      port: 80   
+      targetPort: 8080 
+      
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tasky-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: tasky-service
+            port:
+              number: 80
