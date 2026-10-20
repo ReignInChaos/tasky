@@ -38,7 +38,7 @@ spec:
         image: gcr.io/clgcporg10-188/tasky:latest
         env:
           - name: MONGODB_URI
-            value: "mongodb://wiz:ThisIsABadIdea1234@10.0.0.2:27017"
+            value: "mongodb://admin:password123@10.0.0.2:27017"
           - name: SECRET_KEY
             value: "secret123"
         ports:
