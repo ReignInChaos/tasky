@@ -60,9 +60,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: tasky-ingress
-  annotations:
-    # Provisions an External Google Cloud HTTP(S) Load Balancer
-    kubernetes.io/ingress.class: "gce"
 spec:
   rules:
   - http:
