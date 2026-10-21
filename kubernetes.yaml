@@ -16,6 +16,14 @@ roleRef:
   name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wiz-exercise
+data:
+  wixexercise.txt: |
+    Rich Irwin
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,6 +44,9 @@ spec:
       - name: tasky
         # Cloud Build can dynamically swap this image tag or you can use a fixed tag
         image: gcr.io/clgcporg10-188/tasky:latest
+        volumeMounts:
+        - name: wiz-volume
+          mountPath: /wiz_data
         env:
           - name: MONGODB_URI
             value: "mongodb://wiz:password123@10.0.0.2:27017"
@@ -55,6 +66,10 @@ spec:
             port: 8080
           initialDelaySeconds: 15
           periodSeconds: 20
+  volumes:
+    - name: wiz-volume
+      configMap:
+        name: wiz-exercise
 ---
 apiVersion: v1
 kind: Service
