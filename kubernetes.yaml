@@ -16,13 +16,13 @@ roleRef:
   name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
 
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: wiz-exercise
-data:
-  wixexercise.txt: |
-    Rich Irwin
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: wiz-exercise
+#data:
+#  wixexercise.txt: |
+#    Rich Irwin
 
 apiVersion: apps/v1
 kind: Deployment
@@ -66,10 +66,10 @@ spec:
             port: 8080
           initialDelaySeconds: 15
           periodSeconds: 20
-  volumes:
-    - name: wiz-volume
-      configMap:
-        name: wiz-exercise
+ # volumes:
+  #  - name: wiz-volume
+  #    configMap:
+  #      name: wiz-exercise
 ---
 apiVersion: v1
 kind: Service
