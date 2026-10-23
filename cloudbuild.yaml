@@ -6,24 +6,13 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/tasky', '.']
 
-  - name: 'gcr.io/gcp-runtimes/ubuntu_20_04'
-    entrypoint: 'bash'
+  - name: 'gcr.io/projectsigstore/cosign:v2.4.1' # Adjust version as needed
+    entrypoint: 'cosign'
     args:
-      - '-c'
-      - |
-        # Fetch the exact image digest hash
-        DIGEST=$(gcloud container images describe gcr.io/$PROJECT_ID/my-app:$COMMIT_SHA --format='get(image_summary.digest)')
-        
-        # Create the attestation via gcloud
-        gcloud beta container binauthz attestations create \
-          --artifact-url="gcr.io/$PROJECT_ID/taskyp@$$DIGEST" \
-          --attestor="projects/$PROJECT_ID/attestors/my-custom-attestor" \
-          --attestor-project="$PROJECT_ID" \
-          --keyversion-project="$PROJECT_ID" \
-          --keyversion-location="us-east4" \
-          --keyversion-keyring="wiz-keyrin" \
-          --keyversion-key="wiz-key" \
-          --keyversion="1"
+      - 'sign'
+      - '--key'
+      - 'gcpkms://projects/$PROJECT_ID/locations/global/keyRings/wiz-keyrin/cryptoKeys/wiz-key/versions/1'
+      - 'us-east4-gcr.io/$PROJECT_ID/tasky/my-image:$COMMIT_SHA'
 
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'kubernetes.yaml', '--validate=false']
