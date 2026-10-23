@@ -11,6 +11,25 @@ steps:
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-east4'     
       - 'CLOUDSDK_CONTAINER_CLUSTER=wiz-cluster' 
+
+   - name: 'gcr.io/gcp-runtimes/ubuntu_20_04'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        # Fetch the exact image digest hash
+        DIGEST=$(gcloud container images describe gcr.io/$PROJECT_ID/my-app:$COMMIT_SHA --format='get(image_summary.digest)')
+        
+        # Create the attestation via gcloud
+        gcloud beta container binauthz attestations create \
+          --artifact-url="gcr.io/$PROJECT_ID/taskyp@$$DIGEST" \
+          --attestor="projects/$PROJECT_ID/attestors/my-custom-attestor" \
+          --attestor-project="$PROJECT_ID" \
+          --keyversion-project="$PROJECT_ID" \
+          --keyversion-location="us-east4" \
+          --keyversion-keyring="wiz-keyrin" \
+          --keyversion-key="wiz-key" \
+          --keyversion="1"
 images:
   - 'gcr.io/$PROJECT_ID/tasky'
 
