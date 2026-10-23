@@ -43,7 +43,7 @@ spec:
       containers:
       - name: tasky
         # Cloud Build can dynamically swap this image tag or you can use a fixed tag
-        image: gcr.io/clgcporg10-188/tasky:latest
+        image: gcr.io/clgcporg10-188/tasky:$COMMIT_SHA
 #        volumeMounts:
 #        - name: wiz-volume
 #          mountPath: /wiz_data
