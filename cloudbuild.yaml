@@ -32,13 +32,14 @@ steps:
       
   - name: 'gcr.io/projectsigstore/cosign' # Adjust version as needed
     entrypoint: 'cosign'
+    env:
+      - 'TUF_ROOT=/tmp/.sigstore'
     args:
       - 'sign'
       - '--key'
       - 'gcpkms://projects/clgcporg10-188/locations/us-east4/keyRings/wiz-keyrin/cryptoKeys/wiz-key/cryptoKeyVersions/1'
       - 'gcr.io/$PROJECT_ID/tasky:$SHORT_SHA'
-   env:
-      - 'TUF_ROOT=/tmp/.sigstore'
+   
 
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'kubernetes.yaml', '--validate=false']
