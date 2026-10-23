@@ -37,7 +37,8 @@ steps:
    
 images:
   - 'gcr.io/$PROJECT_ID/tasky:latest'
-
+options:
+  requestedVerifyOption: VERIFIED
 
 
 # Add this section to fix the error:
