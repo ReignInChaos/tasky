@@ -25,7 +25,6 @@ steps:
         > /workspace/image-digest.txt
         echo "Signing image digest: $(cat /workspace/image-digest.txt)"
 
-  steps:
   - name: 'gcr.io/projectsigstore/cosign' # Or your specific build step image
     args: ['sign', 'gcr.io/$PROJECT_ID/tasky:$SHORT_SHA']
     env:
