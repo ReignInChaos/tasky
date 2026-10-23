@@ -37,7 +37,7 @@ steps:
     args:
       - 'sign'
       - '--key'
-      - 'gcpkms://projects/clgcporg10-188/locations/us-east4/keyRings/wiz-keyrin/cryptoKeys/wiz-key/cryptoKeyVersions/1'
+      - 'gcpkms://projects/clgcporg10-188/locations/us-east4/keyRings/wiz-keyring/cryptoKeys/image-signing-key/cryptoKeyVersions/1'
       - 'gcr.io/$PROJECT_ID/tasky:$SHORT_SHA'
    
 
