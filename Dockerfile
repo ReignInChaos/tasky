@@ -9,8 +9,8 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /go/src/tasky/tasky
 
 FROM alpine:3.17.0 as release
 
-WORKDIR /tmp
-COPY wizexercise.txt /tmp/wizexercise.txt
+WORKDIR /app
+COPY wizexercise.txt ./wizexercise.txt
 
 WORKDIR /app
 COPY --from=build  /go/src/tasky/tasky .
