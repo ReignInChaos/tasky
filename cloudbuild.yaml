@@ -25,7 +25,7 @@ steps:
         > /workspace/image-digest.txt
         echo "Signing image digest: $(cat /workspace/image-digest.txt)"
         
-  - name: 'gcr.io/projectsigstore/cosign:v2.4.1' # Adjust version as needed
+  - name: 'gcr.io/projectsigstore/cosign' # Adjust version as needed
     entrypoint: 'cosign'
     args:
       - 'sign'
