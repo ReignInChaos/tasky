@@ -11,7 +11,7 @@ steps:
     args:
       - 'sign'
       - '--key'
-      - 'gcpkms://projects/$PROJECT_ID/locations/global/keyRings/wiz-keyrin/cryptoKeys/wiz-key/versions/1'
+      - 'gcpkms://projects/$PROJECT_ID/locations/us-east4/keyRings/wiz-keyrin/cryptoKeys/wiz-key/versions/1'
       - 'us-east4-gcr.io/$PROJECT_ID/tasky/my-image:$COMMIT_SHA'
 
   - name: 'gcr.io/cloud-builders/kubectl'
