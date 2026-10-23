@@ -1,16 +1,15 @@
-steps:
-    
-- name: 'gcr.io/cloud-builders/docker'
+steps: 
+  - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/tasky:$COMMIT_SHA', '.']
 
-- name: 'gcr.io/cloud-builders/docker'
+  - name: 'gcr.io/cloud-builders/docker'
     id: 'push-image'
     args:
       - 'push'
       - 'gcr.io/$PROJECT_ID/tasky:$COMMIT_SHA'
       
-  - name: 'gcr.io/cloud-builders/docker'
-    id: 'get-digest'
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'get-digest'
     entrypoint: 'bash'
     args:
       - '-c'
