@@ -36,7 +36,7 @@ steps:
       - 'CLOUDSDK_CONTAINER_CLUSTER=wiz-cluster' 
    
 images:
-  - 'gcr.io/$PROJECT_ID/tasky:latestA'
+  - 'gcr.io/$PROJECT_ID/tasky:latest'
 options:
   requestedVerifyOption: VERIFIED
 
