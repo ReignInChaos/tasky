@@ -9,7 +9,6 @@ steps:
 # Step 3: Extract the strict image digest (required for secure signing)
   - name: 'gcr.io/cloud-builders/docker'
     id: 'get-digest'
-    waitFor: ['build']
     entrypoint: 'bash'
     args:
       - '-c'
