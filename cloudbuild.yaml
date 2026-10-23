@@ -4,7 +4,7 @@ steps:
   #  args: ['image', 'prune', '-a', '-f']
     
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/tasky', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/tasky:$SHORT_SHA', '.']
 
 # Step 3: Extract the strict image digest (required for secure signing)
   - name: 'gcr.io/cloud-builders/docker'
