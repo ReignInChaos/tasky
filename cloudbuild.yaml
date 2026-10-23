@@ -25,18 +25,20 @@ steps:
         > /workspace/image-digest.txt
         echo "Signing image digest: $(cat /workspace/image-digest.txt)"
 
-  - name: 'gcr.io/projectsigstore/cosign' # Or your specific build step image
-    args: ['sign', 'gcr.io/$PROJECT_ID/tasky:$SHORT_SHA']
-    env:
-      - 'TUF_ROOT=/tmp/.sigstore'
+#  - name: 'gcr.io/projectsigstore/cosign' # Or your specific build step image
+#    args: ['sign', 'gcr.io/$PROJECT_ID/tasky:$SHORT_SHA']
+#    env:
+#      - 'TUF_ROOT=/tmp/.sigstore'
       
-#  - name: 'gcr.io/projectsigstore/cosign' # Adjust version as needed
-#    entrypoint: 'cosign'
-#    args:
-#      - 'sign'
-#      - '--key'
-#      - 'gcpkms://projects/clgcporg10-188/locations/us-east4/keyRings/wiz-keyrin/cryptoKeys/wiz-key/cryptoKeyVersions/1'
- #     - 'gcr.io/$PROJECT_ID/tasky:$SHORT_SHA'
+  - name: 'gcr.io/projectsigstore/cosign' # Adjust version as needed
+    entrypoint: 'cosign'
+    args:
+      - 'sign'
+      - '--key'
+      - 'gcpkms://projects/clgcporg10-188/locations/us-east4/keyRings/wiz-keyrin/cryptoKeys/wiz-key/cryptoKeyVersions/1'
+      - 'gcr.io/$PROJECT_ID/tasky:$SHORT_SHA'
+   env:
+      - 'TUF_ROOT=/tmp/.sigstore'
 
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'kubernetes.yaml', '--validate=false']
